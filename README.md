@@ -12,4 +12,6 @@
 - now that we have a dockerfile, we can do
   - ```docker build -t sensor-service .```
   - ```docker run --rm -p 9000:9000 --network sensor_server --name sensor-service sensor-service```
-- 
+- Setup RabbitMQ
+  - ```docker run --hostname rabbitmq --name rabbit-server --network sensor_server -p 15672:15672 -p 5672:5672 rabbitmq:management```
+  - go to ```http://localhost:15672/#/``` to see dashboard

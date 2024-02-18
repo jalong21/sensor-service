@@ -15,5 +15,6 @@ libraryDependencies ++= Seq(ehcache,
   filters,
   "net.sf.ehcache" % "ehcache" % "2.10.6",
   "redis.clients" % "jedis" % "5.0.0",
+  "com.rabbitmq" % "amqp-client" % "5.20.0",
   "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test,
   "org.mockito" % "mockito-core" % "3.9.0" % Test)
