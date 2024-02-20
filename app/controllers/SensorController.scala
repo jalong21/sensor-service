@@ -15,19 +15,12 @@ class SensorController @Inject()(cc: ControllerComponents) extends AbstractContr
 
   val log = Logger(this.getClass.getName)
 
-  val callback: DeliverCallback = (consumerTag, delivery) => {
-    val message = new String(delivery.getBody, "UTF-8")
-    println(s"Received $message with tag $consumerTag")
-  }
-
-  RabbitMQService.receiveMessages(callback)
-
   def sensor() = Action {
     request => request.body.asJson
       .map( requestBody => {
         Try(Json.fromJson[Sensor](requestBody).get) match {
           case Success(sensor) => {
-            log.warn(s"received sensor. key: ${sensor.key}, value: ${sensor.value}")
+//            log.warn(s"received sensor. key: ${sensor.key}, value: ${sensor.value}")
             RabbitMQService.sendMessage(Json.toJson(sensor).toString());
             Ok(sensor.key.toString)
           }
